@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import Movie from "./Movie";
+import AddMovie from "./AddMovie";
+import data from "./data";
+
+export const MovieData = createContext();
 
 function App() {
+  const [movies, setMovies] = useState(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MovieData.Provider value={[movies, setMovies]}>
+      <div className="container">
+        <AddMovie />
+        <Movie />
+      </div>
+    </MovieData.Provider>
   );
 }
 
